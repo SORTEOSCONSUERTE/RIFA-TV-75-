@@ -10,68 +10,50 @@
         .foto-tele { max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
         .precio { font-size: 2.2em; color: #2e7d32; font-weight: 800; margin: 10px 0; }
         .fecha { color: #1a73e8; font-weight: bold; font-size: 1.3em; margin-bottom: 5px; }
-        .loteria { color: #555; font-weight: bold; font-size: 1.1em; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .loteria { color: #d93025; font-weight: bold; font-size: 1.1em; margin-bottom: 5px; }
+        .regla-mayor { color: #444; font-weight: bold; font-size: 1em; background: #eef3ff; display: inline-block; padding: 10px 20px; border-radius: 10px; border: 1px solid #1a73e8; margin-bottom: 15px; line-height: 1.4; }
         
-        /* Sección de Pagos */
         .pagos-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 20px 0; }
-        .pagos-box { background: #ffffff; border: 2px solid #1a73e8; padding: 15px; border-radius: 12px; text-align: left; width: 290px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .pagos-box h3 { margin: 0 0 10px 0; color: #1a73e8; font-size: 1.2em; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .pagos-box { background: #ffffff; border: 2px solid #1a73e8; padding: 15px; border-radius: 12px; text-align: left; width: 290px; }
         .pago-detalle { font-size: 1em; line-height: 1.6; }
         .concepto { background: #fff3cd; padding: 12px; border-radius: 8px; font-weight: bold; color: #856404; margin-top: 15px; display: inline-block; border: 1px solid #ffeeba; }
         
-        .reglas { color: #d93025; font-weight: 600; font-size: 0.95em; line-height: 1.5; margin-top: 20px; }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); 
-            gap: 10px; max-width: 900px; margin: 20px auto; 
-            background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        button { 
-            padding: 15px 0; border: 1px solid #ddd; border-radius: 8px; 
-            background: #fff; cursor: pointer; font-weight: bold; font-size: 14px;
-            transition: all 0.2s;
-        }
-        button:hover { background: #e8f0fe; border-color: #1a73e8; transform: scale(1.05); }
-        .vendido { background: #ea4335 !important; color: white; cursor: not-allowed; border: none; opacity: 0.8; }
+        .reglas-pie { color: #d93025; font-weight: 600; font-size: 0.9em; margin-top: 20px; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 10px; max-width: 900px; margin: 20px auto; background: white; padding: 20px; border-radius: 15px; }
+        button { padding: 15px 0; border: 1px solid #ddd; border-radius: 8px; background: #fff; font-weight: bold; cursor: pointer; }
+        .vendido { background: #ea4335 !important; color: white; cursor: not-allowed; border: none; }
     </style>
 </head>
 <body>
 
     <div class="header-info">
-        <img src="tele.jpg" alt="Televisión 75 pulgadas" class="foto-tele" onerror="this.src='https://via.placeholder.com/800x400?text=TV+75+Pulgadas'">
+        <img src="tele.jpg" alt="Televisión 75 pulgadas" class="foto-tele">
         
         <h1>🎫 Reserva tu número</h1>
-        
         <div class="precio">💰 $50 PESOS</div>
-        
-        <div class="fecha">📅 Sorteo: Viernes 27 de febrero de 2026</div>
-        <div class="loteria">🎰 Juega con la Lotería Nacional (8:00 PM)</div>
+        <div class="fecha">📅 Viernes 27 de febrero de 2026</div>
+        <div class="loteria">🎰 Lotería Nacional (20:00 hrs)</div>
+
+        <div class="regla-mayor">
+            ✨ Gana con los últimos 3 números del Premio Mayor.<br>
+            <small>Si no cae en la 1ra línea, se buscará en las siguientes líneas del sorteo oficial hasta encontrar ganador.</small>
+        </div>
 
         <div class="pagos-container">
             <div class="pagos-box">
-                <h3>🏦 BANORTE</h3>
-                <div class="pago-detalle">
-                    <strong>CLABE:</strong><br>072150011419717783<br>
-                    <strong>Titular:</strong> Teresa Martinez
-                </div>
+                <strong>🏦 BANORTE</strong><br>
+                <div class="pago-detalle">CLABE: 072150011419717783<br>Titular: Teresa Martinez</div>
             </div>
-
             <div class="pagos-box">
-                <h3>🏦 BBVA</h3>
-                <div class="pago-detalle">
-                    <strong>Cuenta:</strong><br>012 164 01516821933 5<br>
-                    <strong>Titular:</strong> Teresa Martinez
-                </div>
+                <strong>🏦 BBVA</strong><br>
+                <div class="pago-detalle">Cuenta: 012 164 01516821933 5<br>Titular: Teresa Martinez</div>
             </div>
         </div>
 
-        <div class="concepto">
-            📝 IMPORTANTE: Poner su nombre completo en el concepto de pago.
-        </div>
-
-        <div class="reglas">
-            ⚠️ Boleto no pagado no juega.<br>
-            ⏳ Envía tu comprobante por WhatsApp para validar tu reserva.
+        <div class="concepto">📝 Poner su nombre completo en concepto de pago</div>
+        
+        <div class="reglas-pie">
+            ⚠️ Boleto no pagado no juega. Envía tu comprobante por WhatsApp.
         </div>
     </div>
 
@@ -79,28 +61,22 @@
 
     <script>
         const MI_TELEFONO = "526562161341"; 
-        const TOTAL_BOLETOS = 400;
-
-        // --- LISTA DE NÚMEROS VENDIDOS ---
         const vendidos = ["008", "012", "014", "015", "017", "020", "021", "024", "025", "027", "037", "054", "073", "105", "111", "114", "130", "189"]; 
 
         const tablero = document.getElementById('tablero');
-
-        for (let i = 1; i <= TOTAL_BOLETOS; i++) {
+        for (let i = 1; i <= 400; i++) {
             const num = i.toString().padStart(3, '0');
             const btn = document.createElement('button');
             btn.innerText = num;
-
             if (vendidos.includes(num)) {
                 btn.classList.add('vendido');
                 btn.innerHTML = num + "<br>❌";
                 btn.disabled = true;
             } else {
                 btn.onclick = () => {
-                    const nombre = prompt(`Boleto #${num}\n¿A nombre de quién lo registro?`);
+                    const nombre = prompt(`Boleto #${num}\n¿Nombre del titular?`);
                     if (!nombre) return;
-                    const mensaje = encodeURIComponent(`¡Hola! Quiero reservar el boleto #${num}. Mi nombre es ${nombre}.`);
-                    window.open(`https://wa.me/${MI_TELEFONO}?text=${mensaje}`, '_blank');
+                    window.open(`https://wa.me/${MI_TELEFONO}?text=Reserva%20Boleto%20${num}%20-%20Nombre:%20${nombre}`);
                 };
             }
             tablero.appendChild(btn);
