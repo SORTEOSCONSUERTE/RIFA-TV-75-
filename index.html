@@ -8,8 +8,17 @@
         body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; color: #333; }
         .header-info { background: #fff; max-width: 800px; margin: 0 auto 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 5px solid #1a73e8; }
         .foto-tele { max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .fecha { color: #1a73e8; font-weight: bold; font-size: 1.2em; margin-bottom: 10px; }
-        .reglas { color: #d93025; font-weight: 600; font-size: 0.95em; line-height: 1.5; }
+        .precio { font-size: 2.2em; color: #2e7d32; font-weight: 800; margin: 10px 0; }
+        .fecha { color: #1a73e8; font-weight: bold; font-size: 1.2em; margin-bottom: 15px; }
+        
+        /* Sección de Pagos Mejorada */
+        .pagos-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 20px 0; }
+        .pagos-box { background: #ffffff; border: 2px solid #1a73e8; padding: 15px; border-radius: 12px; text-align: left; width: 280px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .pagos-box h3 { margin: 0 0 10px 0; color: #1a73e8; font-size: 1.1em; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .pago-detalle { font-size: 0.95em; line-height: 1.6; }
+        .concepto { background: #fff3cd; padding: 10px; border-radius: 8px; font-weight: bold; color: #856404; margin-top: 15px; display: inline-block; }
+        
+        .reglas { color: #d93025; font-weight: 600; font-size: 0.95em; line-height: 1.5; margin-top: 20px; }
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); 
@@ -31,10 +40,35 @@
         <img src="tele.jpg" alt="Televisión 75 pulgadas" class="foto-tele" onerror="this.src='https://via.placeholder.com/800x400?text=TV+75+Pulgadas'">
         
         <h1>🎫 Reserva tu número</h1>
-        <div class="fecha">📅 Sorteo: Viernes 27 de febrero de 2026 a las 20:00hrs</div>
+        
+        <div class="precio">💰 $50 PESOS</div>
+        <div class="fecha">📅 Sorteo: Viernes 27 de febrero de 2026</div>
+
+        <div class="pagos-container">
+            <div class="pagos-box">
+                <h3>🏦 BANORTE</h3>
+                <div class="pago-detalle">
+                    <strong>CLABE:</strong> 072150011419717783<br>
+                    <strong>Titular:</strong> Teresa Martinez
+                </div>
+            </div>
+
+            <div class="pagos-box">
+                <h3>🏦 BBVA</h3>
+                <div class="pago-detalle">
+                    <strong>Cuenta:</strong> 012 164 01516821933 5<br>
+                    <strong>Titular:</strong> Teresa Martinez
+                </div>
+            </div>
+        </div>
+
+        <div class="concepto">
+            📝 IMPORTANTE: Poner su nombre completo en el concepto de pago.
+        </div>
+
         <div class="reglas">
             ⚠️ Boleto no pagado no juega.<br>
-            ⏳ Las reservas solo son válidas durante el transcurso del día.
+            ⏳ Envía tu comprobante por WhatsApp para validar tu reserva.
         </div>
     </div>
 
