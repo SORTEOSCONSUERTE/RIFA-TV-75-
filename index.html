@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Rifa Digital</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; color: #333; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); 
+            gap: 10px; max-width: 900px; margin: 30px auto; 
+            background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        button { 
+            padding: 15px 0; border: 1px solid #ddd; border-radius: 8px; 
+            background: #fff; cursor: pointer; font-weight: bold; font-size: 14px;
+            transition: all 0.2s;
+        }
+        button:hover { background: #e8f0fe; border-color: #1a73e8; transform: scale(1.05); }
+        .vendido { background: #ea4335 !important; color: white; cursor: not-allowed; border: none; }
+    </style>
+</head>
+<body>
+
+    <h1 style="color: #1a73e8;">🎫 Reserva tu número</h1>
+    <p>Selecciona un boleto y envíame un WhatsApp para confirmar tu participación.</p>
+
+    <div id="tablero" class="grid"></div>
+
+    <script>
+        // --- CONFIGURACIÓN ---
+        const MI_TELEFONO = "526562161341"; // Tu número de teléfono
+        const TOTAL_BOLETOS = 400;
+        const vendidos = []; // Aquí puedes anotar los números ya vendidos después
+
+        const tablero = document.getElementById('tablero');
+
+        for (let i = 1; i <= TOTAL_BOLETOS; i++) {
+            const num = i.toString().padStart(3, '0');
+            const btn = document.createElement('button');
+            btn.innerText = num;
+
+            if (vendidos.includes(num)) {
+                btn.classList.add('vendido');
+                btn.disabled = true;
+            } else {
+                btn.onclick = () => {
+                    const nombre = prompt(`Has seleccionado el boleto #${num}\n\n¿A nombre de quién lo registro?`);
+                    if (!nombre) return;
+
+                    const mensaje = encodeURIComponent(`¡Hola! Quiero reservar el boleto #${num}. Mi nombre es ${nombre}.`);
+                    window.open(`https://wa.me/${MI_TELEFONO}?text=${mensaje}`, '_blank');
+                };
+            }
+            tablero.appendChild(btn);
+        }
+    </script>
+</body>
+</html>
