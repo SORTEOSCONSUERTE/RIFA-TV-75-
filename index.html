@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Rifa Digital</title>
+    <title>Sorteo TV 75"</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; color: #333; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; color: #333; }
+        .header-info { background: #fff; max-width: 800px; margin: 0 auto 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 5px solid #1a73e8; }
+        .fecha { color: #1a73e8; font-weight: bold; font-size: 1.2em; margin-bottom: 10px; }
+        .reglas { color: #d93025; font-weight: 600; font-size: 0.95em; }
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); 
-            gap: 10px; max-width: 900px; margin: 30px auto; 
+            gap: 10px; max-width: 900px; margin: 20px auto; 
             background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         button { 
@@ -23,16 +26,21 @@
 </head>
 <body>
 
-    <h1 style="color: #1a73e8;">🎫 Reserva tu número</h1>
-    <p>Selecciona un boleto y envíame un WhatsApp para confirmar tu participación.</p>
+    <div class="header-info">
+        <h1>🎫 Reserva tu número</h1>
+        <div class="fecha">📅 Sorteo: Viernes 27 de febrero de 2026 a las 20:00hrs</div>
+        <div class="reglas">
+            ⚠️ Boleto no pagado no juega.<br>
+            ⏳ Las reservas solo son válidas durante el transcurso del día.
+        </div>
+    </div>
 
     <div id="tablero" class="grid"></div>
 
     <script>
-        // --- CONFIGURACIÓN ---
-        const MI_TELEFONO = "526562161341"; // Tu número de teléfono
+        const MI_TELEFONO = "526562161341"; 
         const TOTAL_BOLETOS = 400;
-        const vendidos = []; // Aquí puedes anotar los números ya vendidos después
+        const vendidos = []; // Agrega aquí los números vendidos: ["001", "045"]
 
         const tablero = document.getElementById('tablero');
 
@@ -46,7 +54,7 @@
                 btn.disabled = true;
             } else {
                 btn.onclick = () => {
-                    const nombre = prompt(`Has seleccionado el boleto #${num}\n\n¿A nombre de quién lo registro?`);
+                    const nombre = prompt(`Boleto #${num}\n¿A nombre de quién lo registro?`);
                     if (!nombre) return;
 
                     const mensaje = encodeURIComponent(`¡Hola! Quiero reservar el boleto #${num}. Mi nombre es ${nombre}.`);
