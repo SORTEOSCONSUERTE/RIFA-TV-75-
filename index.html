@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Rifa Digital</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background-color: #f0f2f5; padding: 20px; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); 
+            gap: 10px; max-width: 800px; margin: 20px auto; 
+            background: white; padding: 20px; border-radius: 10px;
+        }
+        button { 
+            padding: 15px 0; border: 1px solid #ccc; border-radius: 5px; 
+            background: white; cursor: pointer; font-weight: bold;
+        }
+        button:hover { background: #e0e0e0; }
+        .vendido { background: #ff4d4d !important; color: white; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <h2>🎫 Reserva tu número para la Rifa</h2>
+    <p>Selecciona un número y envíame un WhatsApp para apartarlo.</p>
+
+    <div id="tablero" class="grid"></div>
+
+    <script>
+        const MI_TELEFONO = "526562161341"; // Ya puse el número que vi en tu captura
+        const TOTAL = 400;
+
+        const tablero = document.getElementById('tablero');
+
+        for (let i = 1; i <= TOTAL; i++) {
+            const num = i.toString().padStart(3, '0');
+            const btn = document.createElement('button');
+            btn.innerText = num;
+
+            btn.onclick = () => {
+                const nombre = prompt(`Boleto #${num}\n¿A nombre de quién?`);
+                if (nombre) {
+                    const mensaje = encodeURIComponent(`¡Hola! Quiero el boleto #${num}. Mi nombre es ${nombre}.`);
+                    window.open(`https://wa.me/${MI_TELEFONO}?text=${mensaje}`, '_blank');
+                }
+            };
+            tablero.appendChild(btn);
+        }
+    </script>
+</body>
+</html>
