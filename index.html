@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteo TV 75" - Cd. Juárez</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; color: #333; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background-color: #f4f7f6; padding: 20px; color: #333; margin-bottom: 100px; }
         .header-info { background: #fff; max-width: 800px; margin: 0 auto 20px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 5px solid #1a73e8; position: relative; }
         .ubicacion-tag { background: #ff9800; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 10px; font-size: 0.9em; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .foto-tele { max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
@@ -13,14 +13,21 @@
         .fecha { color: #1a73e8; font-weight: bold; font-size: 1.3em; margin-bottom: 5px; }
         .loteria { color: #d93025; font-weight: bold; font-size: 1.1em; margin-bottom: 5px; }
         .regla-mayor { color: #444; font-weight: bold; font-size: 1em; background: #eef3ff; display: inline-block; padding: 10px 20px; border-radius: 10px; border: 1px solid #1a73e8; margin-bottom: 15px; line-height: 1.4; }
-        .pagos-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 20px 0; }
-        .pagos-box { background: #ffffff; border: 2px solid #1a73e8; padding: 15px; border-radius: 12px; text-align: left; width: 290px; }
-        .pago-detalle { font-size: 1em; line-height: 1.6; }
-        .concepto { background: #fff3cd; padding: 12px; border-radius: 8px; font-weight: bold; color: #856404; margin-top: 15px; display: inline-block; border: 1px solid #ffeeba; }
-        .reglas-pie { color: #d93025; font-weight: 600; font-size: 0.9em; margin-top: 20px; text-align: center; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 10px; max-width: 900px; margin: 20px auto; background: white; padding: 20px; border-radius: 15px; }
-        button { padding: 15px 0; border: 1px solid #ddd; border-radius: 8px; background: #fff; font-weight: bold; cursor: pointer; }
+        button { padding: 15px 0; border: 1px solid #ddd; border-radius: 8px; background: #fff; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        
+        /* Estados de los botones */
         .vendido { background: #ea4335 !important; color: white; cursor: not-allowed; border: none; }
+        .seleccionado { background: #1a73e8 !important; color: white; border-color: #1a73e8; transform: scale(1.05); box-shadow: 0 4px 8px rgba(26,115,232,0.4); }
+
+        /* Botón de WhatsApp flotante */
+        .btn-flotante { 
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: #25d366; color: white; padding: 15px 30px; border-radius: 50px;
+            font-size: 1.2em; font-weight: bold; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: none; z-index: 1000; border: none; cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -28,62 +35,76 @@
     <div class="header-info">
         <div class="ubicacion-tag">📍 SOLO CIUDAD JUÁREZ</div>
         <img src="tele.jpg" alt="Televisión 75 pulgadas" class="foto-tele">
-        
-        <h1>🎫 Reserva tu número</h1>
-        <div class="precio">💰 $50 PESOS</div>
+        <h1>🎫 Reserva tus números</h1>
+        <div class="precio">💰 $50 PESOS C/U</div>
         <div class="fecha">📅 Viernes 27 de febrero de 2026</div>
         <div class="loteria">🎰 Lotería Nacional (20:00 hrs)</div>
-
-        <div class="regla-mayor">
-            ✨ Gana con los últimos 3 números del Premio Mayor.<br>
-            <small>Si no cae en la 1ra línea, se buscará en las siguientes líneas hasta encontrar ganador.</small>
-        </div>
-
-        <div class="pagos-container">
-            <div class="pagos-box">
-                <strong>🏦 BANORTE</strong><br>
-                <div class="pago-detalle">CLABE: 072150011419717783<br>Titular: Teresa Martinez</div>
-            </div>
-            <div class="pagos-box">
-                <strong>🏦 BBVA</strong><br>
-                <div class="pago-detalle">Cuenta: 012 164 01516821933 5<br>Titular: Teresa Martinez</div>
-            </div>
-        </div>
-
-        <div class="concepto">📝 Poner su nombre completo en concepto de pago</div>
-        
-        <div class="reglas-pie">
-            ⚠️ Sorteo exclusivo para residentes de Cd. Juárez.<br>
-            ⏳ Boleto no pagado no juega. Envía comprobante por WhatsApp.
-        </div>
+        <div class="regla-mayor">Selecciona todos los que quieras y dale clic al botón verde.</div>
     </div>
 
     <div id="tablero" class="grid"></div>
 
+    <button id="btnWhatsapp" class="btn-flotante" onclick="enviarPedido()">
+        Reservar <span id="contador">0</span> números (Total: $<span id="monto">0</span>)
+    </button>
+
     <script>
         const MI_TELEFONO = "526562161341"; 
-        // Lista actualizada con 029, 117 y 167
+        const PRECIO_BOLETO = 50;
         const vendidos = [
             "003", "004", "008", "011", "012", "014", "015", "016", "017", "020", 
             "021", "024", "025", "027", "029", "037", "047", "054", "073", "105", 
             "111", "114", "117", "130", "167", "189", "226", "237"
         ]; 
 
+        let seleccionados = [];
+
+        function actualizarInterfaz() {
+            const btn = document.getElementById('btnWhatsapp');
+            const contador = document.getElementById('contador');
+            const monto = document.getElementById('monto');
+            
+            if (seleccionados.length > 0) {
+                btn.style.display = 'block';
+                contador.innerText = seleccionados.length;
+                monto.innerText = seleccionados.length * PRECIO_BOLETO;
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+
+        function toggleNumero(num, elemento) {
+            if (seleccionados.includes(num)) {
+                seleccionados = seleccionados.filter(n => n !== num);
+                elemento.classList.remove('seleccionado');
+            } else {
+                seleccionados.push(num);
+                elemento.classList.add('seleccionado');
+            }
+            actualizarInterfaz();
+        }
+
+        function enviarPedido() {
+            const nombre = prompt(`Has elegido: ${seleccionados.join(', ')}\n¿A nombre de quién reservamos?`);
+            if (!nombre) return;
+            
+            const mensaje = encodeURIComponent(`¡Hola! Quiero reservar estos boletos:\n🔢 Números: ${seleccionados.join(', ')}\n👤 Nombre: ${nombre}\n💰 Total: $${seleccionados.length * PRECIO_BOLETO} pesos`);
+            window.open(`https://wa.me/${MI_TELEFONO}?text=${mensaje}`);
+        }
+
+        // Generar Tablero
         const tablero = document.getElementById('tablero');
         for (let i = 1; i <= 400; i++) {
             const num = i.toString().padStart(3, '0');
             const btn = document.createElement('button');
             btn.innerText = num;
+
             if (vendidos.includes(num)) {
                 btn.classList.add('vendido');
                 btn.innerHTML = num + "<br>❌";
                 btn.disabled = true;
             } else {
-                btn.onclick = () => {
-                    const nombre = prompt(`Boleto #${num}\n¿Nombre del titular?`);
-                    if (!nombre) return;
-                    window.open(`https://wa.me/${MI_TELEFONO}?text=Reserva%20Boleto%20${num}%20-%20Nombre:%20${nombre}`);
-                };
+                btn.onclick = () => toggleNumero(num, btn);
             }
             tablero.appendChild(btn);
         }
